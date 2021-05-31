@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from 'react';
+import MapContext from './Map/MapContext';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const { map } = useContext(MapContext);
+
+    const handleZoomInClick = () => {
+        map.getView().setZoom(map.getView().getZoom() + 1);
+    };
+
+    const handleZoomOutClick = () => {
+        map.getView().setZoom(map.getView().getZoom() - 1);
+    };
+
+    return (
+        <>
+            <button onClick={handleZoomInClick}>zoomIn</button>
+            <button onClick={handleZoomOutClick}>zoomOut</button>
+            <div id="map" style={{ width: '100%', height: 400 }}>
+            </div>
+        </>
+    );
 }
 
 export default App;
